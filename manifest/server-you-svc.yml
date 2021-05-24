@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: serveryou
+  labels:
+    app: serveryou
+spec:
+  ports:
+  - port: 50051
+    protocol: TCP
+  selector:
+    app: serveryou

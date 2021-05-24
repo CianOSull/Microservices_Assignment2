@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serveryou-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: serveryou
+  minReadySeconds: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: serveryou
+    spec:
+      containers:
+      - name: serveryou
+        image: cianosull/serveryou:latest
+        ports:
+        - containerPort: 50051

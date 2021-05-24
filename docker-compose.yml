@@ -1,0 +1,56 @@
+version: '3'
+services:
+  # Area for youtube
+  serveryou:
+    build:
+      context: .
+      dockerfile: ServerYou/ServerYou.Dockerfile
+    ports: 
+      - "50051:50051"
+  clientyou:
+    build:
+      context: .
+      dockerfile: ClientYou/ClientYou.Dockerfile
+    # I think this makes it so that the client will wait
+    # for server to be working before running
+    # Also I think this uses the wait-for-it script to
+    # do the waiting
+    depends_on:
+      - "serveryou"
+    command: ["./wait-for-it.sh", "serveryou:50051", "--", "python", "ClientYou/clientyou.py"]
+  
+  # Area for reddit
+  serverred:
+    build:
+      context: .
+      dockerfile: ServerRed/ServerRed.Dockerfile
+    ports: 
+      - "50052:50052"
+  clientred:
+    build:
+      context: .
+      dockerfile: ClientRed/ClientRed.Dockerfile
+    # I think this makes it so that the client will wait
+    # for server to be working before running
+    # Also I think this uses the wait-for-it script to
+    # do the waiting
+    depends_on:
+      - "serverred"
+    command: ["./wait-for-it-red.sh", "serverred:50052", "--", "python", "ClientRed/clientred.py"]  
+
+  # This is setting up the redis server for storing the log information
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  
+  # Creating a "WebLogs" service
+  # Created the WebLog docker file for the image
+  weblogs:
+    build:
+      context: .
+      dockerfile: WebLog/WebLog.Dockerfile
+    ports:
+      - "8080:5000"
+    depends_on:
+    - "redis"

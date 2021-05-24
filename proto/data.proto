@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// python3 -m grpc_tools.protoc --proto_path=. ./data.proto --python_out=../ --grpc_python_out=../
+
+service GetDataService {
+    rpc GetData (Posts) returns (CheckReponse) {}
+}
+
+message Posts {
+    string posts = 1;
+}
+
+message CheckReponse {
+    string received = 1;
+}

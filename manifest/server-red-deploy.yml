@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverred-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: serverred
+  minReadySeconds: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: serverred
+    spec:
+      containers:
+      - name: serverred
+        image: cianosull/serverred:latest
+        ports:
+        - containerPort: 50052
