@@ -2,7 +2,7 @@
  Second project for Data Driven Microservices Module.<br />
  All of the work was done using Docker execept for Part 2 where Postman was used to do testing and Netdata was used for monitoring.<br />
 
-Project Specification:<br />
+## Project Specification:<br />
 Overview <br />
 You must take your assignment 1 application and move it to a Kubernetes environment (e.g. using k3s) while making it more flexible to analyse multiple data sources. You must also implement testing and monitoring for the application. You must also create a serverless function that could potentially be useful for your application.<br />
 
