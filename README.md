@@ -1,5 +1,5 @@
 # Microservices_Assignment2
- Second project for Data Driven Microservices Module.<br />
+Second project for Data Driven Microservices Module about using kuberneties, kubeless and doing testing and monitoring on Microservices.<br />
  All of the work was done using Docker execept for Part 2 where Postman was used to do testing and Netdata was used for monitoring.<br />
 
 ## Project Specification:<br />
